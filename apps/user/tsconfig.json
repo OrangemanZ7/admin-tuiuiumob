@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "react-jsx",
+    "strict": true,
+
+    "baseUrl": "./src",
+
+    "types": ["vite/client"],
+
+    "ignoreDeprecations": "6.0"
+  },
+  "include": ["src"]
+}

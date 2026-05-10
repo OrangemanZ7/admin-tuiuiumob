@@ -1,0 +1,108 @@
+admin-tuiuiumob
+├── README.md
+├── apps
+│   ├── admin
+│   │   ├── index.html
+│   │   ├── package-lock.json
+│   │   ├── package.json
+│   │   ├── src
+│   │   │   ├── App.tsx
+│   │   │   ├── api
+│   │   │   │   ├── drivers.ts
+│   │   │   │   ├── rides.ts
+│   │   │   │   ├── ridesRequests.ts
+│   │   │   │   ├── users.ts
+│   │   │   │   └── vehicles.ts
+│   │   │   ├── components
+│   │   │   │   ├── Header.tsx
+│   │   │   │   ├── Layout.tsx
+│   │   │   │   ├── Modal.tsx
+│   │   │   │   ├── Sidebar.tsx
+│   │   │   │   ├── StatusBadge.tsx
+│   │   │   │   └── Table.tsx
+│   │   │   ├── hooks
+│   │   │   ├── main.tsx
+│   │   │   ├── pages
+│   │   │   │   ├── Dashboard
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── Drivers
+│   │   │   │   ├── Requests
+│   │   │   │   ├── Rides
+│   │   │   │   ├── Users
+│   │   │   │   └── Vehicles
+│   │   │   ├── styles
+│   │   │   │   ├── index.css
+│   │   │   │   ├── postcss.config.cjs
+│   │   │   │   └── tailwind.config.ts
+│   │   │   └── vite-env.d.ts
+│   │   ├── tsconfig.json
+│   │   └── vite.config.ts
+│   ├── driver
+│   │   ├── index.html
+│   │   └── vite.config.ts
+│   └── user
+│       ├── index.html
+│       ├── src
+│       │   ├── App.tsx
+│       │   ├── assets
+│       │   │   ├── hero.png
+│       │   │   ├── react.svg
+│       │   │   └── vite.svg
+│       │   ├── components
+│       │   ├── layout
+│       │   │   ├── Header.jsx
+│       │   │   └── Sidebar.jsx
+│       │   ├── main.tsx
+│       │   ├── pages
+│       │   │   ├── Dashboard.jsx
+│       │   │   ├── Finance.jsx
+│       │   │   ├── Reports.jsx
+│       │   │   ├── Rides.jsx
+│       │   │   ├── Settings.jsx
+│       │   │   └── Users.jsx
+│       │   ├── router
+│       │   │   └── AppRouter.jsx
+│       │   ├── services
+│       │   │   └── api.js
+│       │   └── styles
+│       │       └── index.css
+│       └── vite.config.ts
+├── eslint.config.js
+├── package-lock.json
+├── package.json
+├── postcss.config.cjs
+├── public
+│   ├── favicon.svg
+│   └── icons.svg
+├── server
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── src
+│   │   ├── controllers
+│   │   │   ├── driverController.ts
+│   │   │   ├── rideController.ts
+│   │   │   ├── rideRequestController.ts
+│   │   │   ├── userController.ts
+│   │   │   └── vehicleController.ts
+│   │   ├── db
+│   │   │   └── mongo.ts
+│   │   ├── index.ts
+│   │   ├── middleware
+│   │   ├── models
+│   │   │   ├── Driver.ts
+│   │   │   ├── Ride.ts
+│   │   │   ├── RideRequest.ts
+│   │   │   ├── User.ts
+│   │   │   └── Vehicle.ts
+│   │   └── routes
+│   │       ├── drivers.ts
+│   │       ├── rideRequest.ts
+│   │       ├── rides.ts
+│   │       ├── users.ts
+│   │       └── vehicles.ts
+│   └── tsconfig.json
+├── tree.txt
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
