@@ -1,3 +1,5 @@
+// apps/user/src/services/rides.ts
+
 import { api } from "./api";
 
 export async function createRideRequest(data: {

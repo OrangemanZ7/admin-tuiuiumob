@@ -1,3 +1,5 @@
+// apps/admin/src/components/Header.tsx
+
 interface HeaderProps {
   title: string;
 }

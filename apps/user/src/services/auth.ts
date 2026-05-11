@@ -1,3 +1,5 @@
+// apps/user/src/services/auth.ts
+
 import { api } from "./api";
 
 export async function loginUser(email: string, password: string) {

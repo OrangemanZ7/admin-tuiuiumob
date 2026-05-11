@@ -1,3 +1,5 @@
+// apps/user/src/pages/Login.tsx
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/auth";
@@ -16,7 +18,7 @@ export default function Login() {
     try {
       const user = await loginUser(email, password);
 
-      localStorage.setItem("driver", JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(user));
 
       navigate("/");
     } catch (err: any) {

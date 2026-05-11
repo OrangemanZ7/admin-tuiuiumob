@@ -1,4 +1,6 @@
-import { Layout } from "../../components/Layout";
+// apps/admin/src/pages/Dashboard/index.tsx
+
+import { Layout } from "../../layout/Layout";
 
 export default function Dashboard() {
   return (

@@ -1,3 +1,5 @@
+//  apps/user/src/pages/Profile.tsx
+
 export default function Profile() {
   return (
     <div className="p-4">

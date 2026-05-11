@@ -17,7 +17,7 @@ export default function Login() {
     try {
       const driver = await loginDriver(email, password);
       localStorage.setItem("driver", JSON.stringify(driver));
-      navigate("/dashboard");
+      navigate("/");
     } catch (err: any) {
       setError(err.response?.data?.error || "Erro ao fazer login");
     }

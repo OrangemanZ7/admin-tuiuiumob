@@ -1,5 +1,7 @@
-import { Sidebar } from "./Sidebar";
-import { Header } from "./Header";
+// apps/admin/src/layout/Layout.tsx
+
+import { Sidebar } from "../components/Sidebar";
+import { Header } from "../components/Header";
 
 export function Layout({ title, children }: any) {
   return (
