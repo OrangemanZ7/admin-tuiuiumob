@@ -141,7 +141,9 @@ export async function updateVehicle(req: Request, res: Response) {
     ...VEHICLE_PATCH_FIELDS,
   ]);
   if (Object.keys(updates).length === 0) {
-    return res.status(400).json({ error: "Nenhum campo permitido para atualização" });
+    return res
+      .status(400)
+      .json({ error: "Nenhum campo permitido para atualização" });
   }
 
   const updated = await Vehicle.findByIdAndUpdate(id, updates, {

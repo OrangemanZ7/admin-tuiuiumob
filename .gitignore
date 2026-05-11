@@ -11,8 +11,11 @@ node_modules
 dist
 dist-ssr
 *.local
+codebase.txt
+tree.txt
 
 # Editor directories and files
+.continue
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -25,4 +28,3 @@ dist-ssr
 
 # Variáveis de ambiente
 .env
-.env.local
