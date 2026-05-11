@@ -24,7 +24,7 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok", message: "API rodando" });
 });
 
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
 
 async function start() {
   await connectMongo();
