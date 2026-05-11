@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "server": "cd server && npm run dev",
-    "admin": "cd apps/admin && npm run dev",
-    "user": "cd apps/user && npm run dev",
-    "driver": "cd apps/driver && npm run dev",
+    "server": "cd server && npm run dev -- --host",
+    "admin": "cd apps/admin && npm run dev -- --host",
+    "user": "cd apps/user && npm run dev -- --host",
+    "driver": "cd apps/driver && npm run dev -- --host",
     "dev:all": "concurrently -k -n server,admin,user,driver -c blue,magenta,green,yellow \"npm run server\" \"npm run admin\" \"npm run user\" \"npm run driver\""
   },
   "dependencies": {
