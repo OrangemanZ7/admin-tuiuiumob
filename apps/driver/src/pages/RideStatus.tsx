@@ -1,10 +1,10 @@
-// driver/src/pages/RideStatus.tsx
+// apps/driver/src/pages/RideStatus.tsx
 
 import { useEffect, useState } from "react";
-import { getLatestRideRequest } from "../services/rides";
+import { getMyRides } from "../services/rides";
 
 export default function RideStatus() {
-  const [status, setStatus] = useState<string | null>(null);
+  const [summary, setSummary] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -13,21 +13,32 @@ export default function RideStatus() {
       setLoading(true);
       setError("");
 
-      const user = JSON.parse(localStorage.getItem("user")!);
-      const userId = user.id ?? user._id;
+      const rides: Array<{
+        status: string;
+        originCity?: string;
+        destinationCity?: string;
+      }> = await getMyRides();
 
-      const request = await getLatestRideRequest(userId);
-
-      setStatus(request.status);
-    } catch (err: any) {
-      setError(err.response?.data?.error || "Erro ao buscar status");
+      const open = rides.find((r) => r.status === "open");
+      if (open) {
+        setSummary(
+          `Viagem aberta: ${open.originCity ?? "?"} → ${open.destinationCity ?? "?"}`,
+        );
+      } else if (rides.length === 0) {
+        setSummary("Nenhuma viagem cadastrada.");
+      } else {
+        setSummary(`Última situação: ${rides[0]?.status ?? "—"}`);
+      }
+    } catch (err: unknown) {
+      const ax = err as { response?: { data?: { error?: string } } };
+      setError(ax.response?.data?.error || "Erro ao buscar status");
     } finally {
       setLoading(false);
     }
   }
 
   useEffect(() => {
-    fetchStatus(); // Carrega apenas uma vez ao entrar na página
+    fetchStatus();
   }, []);
 
   return (
@@ -38,13 +49,14 @@ export default function RideStatus() {
 
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
-      {status && (
+      {summary && (
         <p className="text-lg mb-4">
-          Status atual: <span className="font-bold capitalize">{status}</span>
+          <span className="font-medium">{summary}</span>
         </p>
       )}
 
       <button
+        type="button"
         onClick={fetchStatus}
         className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
       >

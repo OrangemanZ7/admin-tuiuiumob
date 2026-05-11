@@ -7,7 +7,8 @@
     "server": "cd server && npm run dev",
     "admin": "cd apps/admin && npm run dev",
     "user": "cd apps/user && npm run dev",
-    "driver": "cd apps/driver && npm run dev"
+    "driver": "cd apps/driver && npm run dev",
+    "dev:all": "concurrently -k -n server,admin,user,driver -c blue,magenta,green,yellow \"npm run server\" \"npm run admin\" \"npm run user\" \"npm run driver\""
   },
   "dependencies": {
     "axios": "^1.16.0",
@@ -22,6 +23,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "autoprefixer": "^10.5.0",
+    "concurrently": "^9.2.1",
     "eslint": "^10.2.1",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",

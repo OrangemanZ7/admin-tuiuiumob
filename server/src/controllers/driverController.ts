@@ -1,12 +1,28 @@
 // src/controllers/driverController.ts
 
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import { Driver } from "../models/Driver.js";
+import { signDriverToken } from "../auth/jwt.js";
+import { isAdmin } from "../middleware/auth.js";
+import { pickAllowedKeys, stripPassword } from "../utils/sanitize.js";
+
+const DRIVER_SELF_PATCH = ["name", "email", "cnh"] as const;
+const DRIVER_ADMIN_PATCH = [
+  "name",
+  "email",
+  "cnh",
+  "status",
+  "verified",
+] as const;
 
 export async function createDriver(req: Request, res: Response) {
   try {
     const { name, email, password, cnh } = req.body;
+
+    if (!name || !email || !password || !cnh) {
+      return res.status(400).json({ error: "Dados incompletos" });
+    }
 
     const exists = await Driver.findOne({ email }).lean();
     if (exists) {
@@ -22,12 +38,12 @@ export async function createDriver(req: Request, res: Response) {
       email,
       passwordHash,
       cnh,
-      vehicles: [], // ← agora sempre começa vazio
+      vehicles: [],
       status: "pending",
       verified: false,
     });
 
-    res.status(201).json(driver);
+    res.status(201).json(stripPassword(driver.toObject()));
   } catch (error) {
     console.error("Erro ao criar motorista:", error);
     res.status(500).json({ error: "Erro interno ao criar motorista" });
@@ -54,16 +70,12 @@ export async function registerDriver(req: Request, res: Response) {
       email,
       passwordHash,
       cnh,
-      vehicles: [], // ← sempre começa vazio
+      vehicles: [],
       status: "pending",
+      verified: false,
     });
 
-    res.status(201).json({
-      id: driver._id,
-      name: driver.name,
-      email: driver.email,
-      status: driver.status,
-    });
+    res.status(201).json(stripPassword(driver.toObject()));
   } catch (error) {
     console.error("Erro ao registrar motorista:", error);
     res.status(500).json({ error: "Erro interno ao registrar motorista" });
@@ -74,7 +86,7 @@ export async function loginDriver(req: Request, res: Response) {
   try {
     const { email, password } = req.body;
 
-    const driver = await Driver.findOne({ email });
+    const driver = await Driver.findOne({ email }).lean();
     if (!driver) {
       return res.status(400).json({ error: "Email ou senha inválidos" });
     }
@@ -84,16 +96,15 @@ export async function loginDriver(req: Request, res: Response) {
       return res.status(400).json({ error: "Email ou senha inválidos" });
     }
 
-    // opcional: bloquear motorista não verificado
     if (driver.status !== "active") {
       return res.status(403).json({ error: "Motorista ainda não aprovado" });
     }
 
+    const token = signDriverToken(String(driver._id));
+
     return res.json({
-      id: driver._id,
-      name: driver.name,
-      email: driver.email,
-      status: driver.status,
+      token,
+      driver: stripPassword(driver),
     });
   } catch (error) {
     console.error("Erro ao fazer login:", error);
@@ -101,16 +112,24 @@ export async function loginDriver(req: Request, res: Response) {
   }
 }
 
-export async function listDrivers(req: Request, res: Response) {
-  const drivers = await Driver.find().lean();
+export async function listDrivers(_req: Request, res: Response) {
+  const drivers = await Driver.find().select("-passwordHash").lean();
   res.json(drivers);
 }
 
 export async function getDriverById(req: Request, res: Response) {
   const { id } = req.params;
+  const auth = req.auth;
+
+  const allowed =
+    isAdmin(auth) || (auth?.type === "driver" && auth.sub === id);
+  if (!allowed) {
+    return res.status(403).json({ error: "Sem permissão" });
+  }
 
   const driver = await Driver.findById(id)
-    .populate("vehicles") // ← agora popula os veículos
+    .select("-passwordHash")
+    .populate("vehicles")
     .lean();
 
   if (!driver) {
@@ -122,10 +141,25 @@ export async function getDriverById(req: Request, res: Response) {
 
 export async function updateDriver(req: Request, res: Response) {
   const { id } = req.params;
-  const updates = req.body;
+  const auth = req.auth;
+
+  const isSelf = auth?.type === "driver" && auth.sub === id;
+  if (!isSelf && !isAdmin(auth)) {
+    return res.status(403).json({ error: "Sem permissão" });
+  }
+
+  const allowedKeys = isAdmin(auth) ? DRIVER_ADMIN_PATCH : DRIVER_SELF_PATCH;
+  const updates = pickAllowedKeys(req.body as Record<string, unknown>, [
+    ...allowedKeys,
+  ]);
+
+  if (Object.keys(updates).length === 0) {
+    return res.status(400).json({ error: "Nenhum campo permitido para atualização" });
+  }
 
   const driver = await Driver.findByIdAndUpdate(id, updates, {
     returnDocument: "after",
+    select: "-passwordHash",
   }).lean();
 
   if (!driver) {
@@ -141,7 +175,7 @@ export async function verifyDriver(req: Request, res: Response) {
   const driver = await Driver.findByIdAndUpdate(
     id,
     { verified: true, status: "active" },
-    { returnDocument: "after" },
+    { returnDocument: "after", select: "-passwordHash" },
   ).lean();
 
   if (!driver) {

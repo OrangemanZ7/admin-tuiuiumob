@@ -1,7 +1,7 @@
 // apps/user/src/pages/RideStatus.tsx
 
 import { useEffect, useState } from "react";
-import { getLatestRideRequest } from "../services/rides";
+import { getLatestRideRequestMe } from "../services/rides";
 
 export default function RideStatus() {
   const [status, setStatus] = useState<string | null>(null);
@@ -13,10 +13,7 @@ export default function RideStatus() {
       setLoading(true);
       setError("");
 
-      const user = JSON.parse(localStorage.getItem("user")!);
-      const userId = user.id ?? user._id;
-
-      const request = await getLatestRideRequest(userId);
+      const request = await getLatestRideRequestMe();
 
       setStatus(request.status);
     } catch (err: any) {

@@ -15,7 +15,8 @@ export default function Login() {
     setError("");
 
     try {
-      const driver = await loginDriver(email, password);
+      const { token, driver } = await loginDriver(email, password);
+      localStorage.setItem("token", token);
       localStorage.setItem("driver", JSON.stringify(driver));
       navigate("/");
     } catch (err: any) {

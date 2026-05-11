@@ -16,13 +16,18 @@ export default function Login() {
     setError("");
 
     try {
-      const user = await loginUser(email, password);
+      const { token, user } = await loginUser(email, password);
 
+      localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
       navigate("/");
     } catch (err: any) {
-      setError(err.response?.data?.message || "Erro ao fazer login");
+      setError(
+        err.response?.data?.error ||
+          err.response?.data?.message ||
+          "Erro ao fazer login",
+      );
     }
   }
 

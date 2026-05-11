@@ -1,9 +1,13 @@
-// apps/admin/src/layout/Layout.tsx
-
+import type { ReactNode } from "react";
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
 
-export function Layout({ title, children }: any) {
+interface LayoutProps {
+  title: string;
+  children: ReactNode;
+}
+
+export function Layout({ title, children }: LayoutProps) {
   return (
     <div className="flex">
       <Sidebar />

@@ -16,11 +16,7 @@ export default function RequestRide() {
     setError("");
 
     try {
-      const user = JSON.parse(localStorage.getItem("user")!);
-      const userId = user.id ?? user._id;
-
       await createRideRequest({
-        userId,
         origin,
         destination,
       });

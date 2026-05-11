@@ -7,19 +7,22 @@ import {
   loginUser,
   listUsers,
   getUserById,
+  updateUser,
   updateUserStatus,
   deleteUser,
 } from "../controllers/userController.js";
+import { authMiddleware, requireAdmin } from "../middleware/auth.js";
 
 const router = Router();
 
-router.post("/create", createUser);
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 
-router.get("/", listUsers);
-router.get("/:id", getUserById);
-router.patch("/:id/status", updateUserStatus);
-router.delete("/:id", deleteUser);
+router.post("/create", authMiddleware, requireAdmin, createUser);
+router.get("/", authMiddleware, requireAdmin, listUsers);
+router.get("/:id", authMiddleware, getUserById);
+router.patch("/:id/status", authMiddleware, requireAdmin, updateUserStatus);
+router.patch("/:id", authMiddleware, updateUser);
+router.delete("/:id", authMiddleware, requireAdmin, deleteUser);
 
 export default router;

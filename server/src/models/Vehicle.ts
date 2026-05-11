@@ -1,9 +1,9 @@
 // server/src/models/Vehicle.ts
 
-import { Schema, model, type Document } from "mongoose";
+import { Schema, model, type Document, type Types } from "mongoose";
 
 export interface IVehicle extends Document {
-  driverId: Schema.Types.ObjectId;
+  driverId: Types.ObjectId;
   vehicleMake: string;
   vehicleModel: string;
   plate: string;

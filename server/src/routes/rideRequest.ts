@@ -7,21 +7,27 @@ import {
   rejectRequest,
   cancelRequest,
   createRideRequest,
-  getLatestRideRequest,
+  getLatestRideRequestMe,
+  getLatestRideRequestByUserId,
   listPendingRequests,
+  listRideRequestsByRideQuery,
+  getRideRequestById,
 } from "../controllers/rideRequestController.js";
+import { authMiddleware, requireUser } from "../middleware/auth.js";
 
 const router = Router();
 
-router.post("/", createRideRequest);
+router.post("/", authMiddleware, requireUser, createRideRequest);
+router.get("/me/latest", authMiddleware, requireUser, getLatestRideRequestMe);
+router.get("/pending", authMiddleware, listPendingRequests);
+router.get("/user/:userId", authMiddleware, getLatestRideRequestByUserId);
+router.get("/", authMiddleware, listRideRequestsByRideQuery);
+router.get("/:requestId", authMiddleware, getRideRequestById);
 
-router.get("/pending", listPendingRequests);
-router.get("/user/:userId", getLatestRideRequest);
+router.post("/:rideId/request", authMiddleware, requireUser, requestSeat);
 
-router.post("/:rideId/request", requestSeat);
-
-router.patch("/:requestId/accept", acceptRequest);
-router.patch("/:requestId/reject", rejectRequest);
-router.patch("/:requestId/cancel", cancelRequest);
+router.patch("/:requestId/accept", authMiddleware, acceptRequest);
+router.patch("/:requestId/reject", authMiddleware, rejectRequest);
+router.patch("/:requestId/cancel", authMiddleware, cancelRequest);
 
 export default router;

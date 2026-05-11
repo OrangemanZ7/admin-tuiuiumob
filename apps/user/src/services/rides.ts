@@ -3,7 +3,6 @@
 import { api } from "./api";
 
 export async function createRideRequest(data: {
-  userId: string;
   origin: string;
   destination: string;
 }) {
@@ -11,7 +10,7 @@ export async function createRideRequest(data: {
   return response.data;
 }
 
-export async function getLatestRideRequest(userId: string) {
-  const response = await api.get(`/ride-requests/user/${userId}`);
+export async function getLatestRideRequestMe() {
+  const response = await api.get("/ride-requests/me/latest");
   return response.data;
 }

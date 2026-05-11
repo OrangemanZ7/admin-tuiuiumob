@@ -1,4 +1,4 @@
-// driver/src/services/rides.ts
+// apps/driver/src/services/rides.ts
 
 import { api } from "./api";
 
@@ -12,9 +12,7 @@ export async function acceptRequest(requestId: string) {
   return response.data;
 }
 
-export async function getLatestRideRequest(userId: string) {
-  const response = await api.get(
-    `/ride-requests?userId=${userId}&sort=-createdAt&limit=1`,
-  );
-  return response.data[0];
+export async function getMyRides() {
+  const response = await api.get("/rides/mine");
+  return response.data;
 }

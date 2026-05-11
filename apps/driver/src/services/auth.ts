@@ -4,7 +4,16 @@ import { api } from "./api";
 
 export async function loginDriver(email: string, password: string) {
   const response = await api.post("/drivers/login", { email, password });
-  return response.data;
+  return response.data as {
+    token: string;
+    driver: {
+      id?: string;
+      _id?: string;
+      name: string;
+      email: string;
+      status: string;
+    };
+  };
 }
 
 export async function registerDriver(

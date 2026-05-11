@@ -7,14 +7,15 @@ import {
   updateVehicle,
   deleteVehicle,
 } from "../controllers/vehicleController.js";
+import { authMiddleware, requireAdmin, requireAdminOrDriver } from "../middleware/auth.js";
 
 const router = Router();
 
-router.post("/create", createVehicle);
-router.get("/", listVehicles);
-router.get("/:id", getVehicleById);
-router.get("/driver/:driverId", listVehiclesByDriver);
-router.patch("/:id", updateVehicle);
-router.delete("/:id", deleteVehicle);
+router.post("/create", authMiddleware, requireAdminOrDriver, createVehicle);
+router.get("/", authMiddleware, requireAdmin, listVehicles);
+router.get("/driver/:driverId", authMiddleware, listVehiclesByDriver);
+router.get("/:id", authMiddleware, getVehicleById);
+router.patch("/:id", authMiddleware, updateVehicle);
+router.delete("/:id", authMiddleware, deleteVehicle);
 
 export default router;

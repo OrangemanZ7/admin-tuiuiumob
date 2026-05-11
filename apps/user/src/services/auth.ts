@@ -8,7 +8,10 @@ export async function loginUser(email: string, password: string) {
     password,
   });
 
-  return response.data;
+  return response.data as {
+    token: string;
+    user: { id?: string; _id?: string; name: string; email: string; status: string; role?: string };
+  };
 }
 
 export async function registerUser(
