@@ -8,7 +8,8 @@ const MONGO_URI =
 export async function connectMongo() {
   try {
     await mongoose.connect(MONGO_URI);
-    console.log("✅ Conectado ao MongoDB em 27017 (db: tuiuiumob)", MONGO_URI);
+    console.log("✅ Conectando a: ", MONGO_URI);
+    console.log("✅ Conectado ao MongoDB em 27017 (db: tuiuiumob)");
   } catch (error) {
     console.error("❌ Erro ao conectar no MongoDB:", error);
     process.exit(1);
