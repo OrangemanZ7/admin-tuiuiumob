@@ -1,4 +1,4 @@
-// src/models/RideRequest.ts
+// TUIUIUMOB/server/src/models/RideRequest.ts
 
 import { Schema, model, type Document, Types } from "mongoose";
 

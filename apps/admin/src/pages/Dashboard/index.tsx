@@ -1,3 +1,5 @@
+// TUIUIUMOB/apps/admin/src/pages/Dashboard/index.tsx
+
 import { useEffect, useState } from "react";
 import { Layout } from "../../layout/Layout";
 import { fetchUsers } from "../../api/users";
@@ -32,19 +34,29 @@ export default function Dashboard() {
         });
       } catch (e: unknown) {
         const ax = e as { response?: { data?: { error?: string } } };
-        setError(ax.response?.data?.error ?? "Não foi possível carregar métricas");
+        setError(
+          ax.response?.data?.error ?? "Não foi possível carregar métricas",
+        );
       }
     })();
   }, []);
 
   const cards = [
-    { label: "Usuários ativos", value: stats.users, tone: "bg-sky-50 border-sky-200" },
+    {
+      label: "Usuários ativos",
+      value: stats.users,
+      tone: "bg-sky-50 border-sky-200",
+    },
     {
       label: "Motoristas ativos",
       value: stats.drivers,
       tone: "bg-emerald-50 border-emerald-200",
     },
-    { label: "Viagens abertas", value: stats.rides, tone: "bg-amber-50 border-amber-200" },
+    {
+      label: "Viagens abertas",
+      value: stats.rides,
+      tone: "bg-amber-50 border-amber-200",
+    },
     {
       label: "Solicitações pendentes",
       value: stats.requests,

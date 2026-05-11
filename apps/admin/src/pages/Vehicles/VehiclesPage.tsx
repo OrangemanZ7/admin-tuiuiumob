@@ -1,3 +1,5 @@
+// TUIUIUMOB/apps/admin/src/pages/Vehicles/VehiclesPage.tsx
+
 import { useCallback, useEffect, useState } from "react";
 import { Layout } from "../../layout/Layout";
 import {
@@ -120,19 +122,28 @@ export default function VehiclesPage() {
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-slate-500">
+                <td
+                  colSpan={7}
+                  className="px-4 py-8 text-center text-slate-500"
+                >
                   Carregando…
                 </td>
               </tr>
             ) : rows.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-slate-500">
+                <td
+                  colSpan={7}
+                  className="px-4 py-8 text-center text-slate-500"
+                >
                   Nenhum veículo
                 </td>
               </tr>
             ) : (
               rows.map((v) => (
-                <tr key={v._id} className="border-b border-slate-100 hover:bg-slate-50/80">
+                <tr
+                  key={v._id}
+                  className="border-b border-slate-100 hover:bg-slate-50/80"
+                >
                   <td className="px-4 py-3 font-mono font-medium">{v.plate}</td>
                   <td className="px-4 py-3 text-slate-700">
                     {v.vehicleMake} {v.vehicleModel}
@@ -204,7 +215,9 @@ export default function VehiclesPage() {
                 placeholder="Placa"
                 className="w-full rounded-lg border border-slate-300 px-3 py-2"
                 value={form.plate}
-                onChange={(e) => setForm((f) => ({ ...f, plate: e.target.value }))}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, plate: e.target.value }))
+                }
               />
               <div className="grid grid-cols-2 gap-2">
                 <input
@@ -235,7 +248,9 @@ export default function VehiclesPage() {
                 placeholder="Cor"
                 className="w-full rounded-lg border border-slate-300 px-3 py-2"
                 value={form.color}
-                onChange={(e) => setForm((f) => ({ ...f, color: e.target.value }))}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, color: e.target.value }))
+                }
               />
               <div className="flex justify-end gap-2 pt-2">
                 <button

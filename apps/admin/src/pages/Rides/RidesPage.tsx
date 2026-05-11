@@ -1,3 +1,5 @@
+// TUIUIUMOB/apps/admin/src/pages/Rides/RidesPage.tsx
+
 import { useCallback, useEffect, useState } from "react";
 import { Layout } from "../../layout/Layout";
 import {
@@ -175,19 +177,28 @@ export default function RidesPage() {
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-slate-500">
+                <td
+                  colSpan={7}
+                  className="px-4 py-8 text-center text-slate-500"
+                >
                   Carregando…
                 </td>
               </tr>
             ) : rows.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-slate-500">
+                <td
+                  colSpan={7}
+                  className="px-4 py-8 text-center text-slate-500"
+                >
                   Nenhuma viagem
                 </td>
               </tr>
             ) : (
               rows.map((r) => (
-                <tr key={r._id} className="border-b border-slate-100 hover:bg-slate-50/80">
+                <tr
+                  key={r._id}
+                  className="border-b border-slate-100 hover:bg-slate-50/80"
+                >
                   <td className="px-4 py-3 text-slate-800">
                     <div className="font-medium">
                       {r.originCity} → {r.destinationCity}
@@ -203,7 +214,9 @@ export default function RidesPage() {
                     {labelRef(r.driverId)}
                   </td>
                   <td className="px-4 py-3 text-slate-600">R$ {r.price}</td>
-                  <td className="px-4 py-3 text-slate-600">{r.seatsAvailable}</td>
+                  <td className="px-4 py-3 text-slate-600">
+                    {r.seatsAvailable}
+                  </td>
                   <td className="px-4 py-3">
                     <select
                       value={r.status}
@@ -254,7 +267,11 @@ export default function RidesPage() {
                 className="w-full rounded-lg border border-slate-300 px-3 py-2"
                 value={form.driverId}
                 onChange={(e) =>
-                  setForm((f) => ({ ...f, driverId: e.target.value, vehicleId: "" }))
+                  setForm((f) => ({
+                    ...f,
+                    driverId: e.target.value,
+                    vehicleId: "",
+                  }))
                 }
               >
                 <option value="">Motorista…</option>

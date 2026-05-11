@@ -1,4 +1,4 @@
-// apps/user/src/pages/Dashboard.tsx
+// TUIUIUMOB/apps/user/src/pages/Dashboard.tsx
 
 export default function Dashboard() {
   return (

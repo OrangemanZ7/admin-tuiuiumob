@@ -1,3 +1,5 @@
+// TUIUIUMOB/server/src/types/express.d.ts
+
 import type { AuthPayload } from "../auth/types.js";
 
 declare global {

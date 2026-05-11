@@ -1,3 +1,5 @@
+// TUIUIUMOB/apps/admin/src/api/vehicles.ts
+
 import { api } from "./api";
 
 export type AdminVehicle = {
@@ -44,12 +46,7 @@ export async function updateVehicle(
   body: Partial<
     Pick<
       AdminVehicle,
-      | "vehicleMake"
-      | "vehicleModel"
-      | "plate"
-      | "year"
-      | "seats"
-      | "color"
+      "vehicleMake" | "vehicleModel" | "plate" | "year" | "seats" | "color"
     >
   >,
 ): Promise<AdminVehicle> {

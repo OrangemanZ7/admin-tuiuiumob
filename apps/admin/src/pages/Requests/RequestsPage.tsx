@@ -1,3 +1,5 @@
+// TUIUIUMOB/apps/admin/src/pages/Requests/RequestsPage.tsx
+
 import { useCallback, useEffect, useState } from "react";
 import { Layout } from "../../layout/Layout";
 import {
@@ -98,13 +100,19 @@ export default function RequestsPage() {
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={6} className="px-4 py-8 text-center text-slate-500">
+                <td
+                  colSpan={6}
+                  className="px-4 py-8 text-center text-slate-500"
+                >
                   Carregando…
                 </td>
               </tr>
             ) : rows.length === 0 ? (
               <tr>
-                <td colSpan={6} className="px-4 py-8 text-center text-slate-500">
+                <td
+                  colSpan={6}
+                  className="px-4 py-8 text-center text-slate-500"
+                >
                   Nenhuma solicitação pendente
                 </td>
               </tr>
@@ -136,7 +144,9 @@ export default function RequestsPage() {
                     </td>
                     <td className="px-4 py-3 text-slate-600">
                       {seat ? (
-                        <span className="text-xs">{rideSummary(req.rideId)}</span>
+                        <span className="text-xs">
+                          {rideSummary(req.rideId)}
+                        </span>
                       ) : (
                         <span className="text-slate-400">Sem viagem</span>
                       )}

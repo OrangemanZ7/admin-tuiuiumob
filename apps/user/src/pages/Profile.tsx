@@ -1,4 +1,4 @@
-//  apps/user/src/pages/Profile.tsx
+// TUIUIUMOB/apps/user/src/pages/Profile.tsx
 
 export default function Profile() {
   return (

@@ -1,4 +1,4 @@
-// apps/admin/src/main.tsx
+// TUIUIUMOB/apps/admin/src/main.tsx
 
 import React from "react";
 import ReactDOM from "react-dom/client";

@@ -1,4 +1,4 @@
-// src/controllers/driverController.ts
+// TUIUIUMOB/server/src/controllers/driverController.ts
 
 import type { Request, Response } from "express";
 import bcrypt from "bcryptjs";
@@ -121,8 +121,7 @@ export async function getDriverById(req: Request, res: Response) {
   const { id } = req.params;
   const auth = req.auth;
 
-  const allowed =
-    isAdmin(auth) || (auth?.type === "driver" && auth.sub === id);
+  const allowed = isAdmin(auth) || (auth?.type === "driver" && auth.sub === id);
   if (!allowed) {
     return res.status(403).json({ error: "Sem permissão" });
   }
@@ -154,7 +153,9 @@ export async function updateDriver(req: Request, res: Response) {
   ]);
 
   if (Object.keys(updates).length === 0) {
-    return res.status(400).json({ error: "Nenhum campo permitido para atualização" });
+    return res
+      .status(400)
+      .json({ error: "Nenhum campo permitido para atualização" });
   }
 
   const driver = await Driver.findByIdAndUpdate(id, updates, {

@@ -1,4 +1,4 @@
-// src/router/AppRouter.tsx
+// TUIUIUMOB/apps/driver/src/router/AppRouter.tsx
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 

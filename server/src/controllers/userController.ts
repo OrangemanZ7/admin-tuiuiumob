@@ -1,4 +1,4 @@
-// src/controllers/userController.ts
+// TUIUIUMOB/server/src/controllers/userController.ts
 
 import type { Request, Response } from "express";
 import { User } from "../models/User.js";
@@ -114,7 +114,9 @@ export async function getUserById(req: Request, res: Response) {
   const auth = req.auth;
 
   if (!isAdmin(auth) && !(auth?.type === "user" && auth.sub === id)) {
-    return res.status(403).json({ error: "Sem permissão para ver este usuário" });
+    return res
+      .status(403)
+      .json({ error: "Sem permissão para ver este usuário" });
   }
 
   const user = await User.findById(id).select("-passwordHash").lean();
@@ -130,7 +132,9 @@ export async function updateUser(req: Request, res: Response) {
   const auth = req.auth;
 
   if (!isAdmin(auth) && !(auth?.type === "user" && auth.sub === id)) {
-    return res.status(403).json({ error: "Sem permissão para atualizar este usuário" });
+    return res
+      .status(403)
+      .json({ error: "Sem permissão para atualizar este usuário" });
   }
 
   const updates = pickAllowedKeys(req.body as Record<string, unknown>, [
@@ -138,7 +142,9 @@ export async function updateUser(req: Request, res: Response) {
   ]);
 
   if (Object.keys(updates).length === 0) {
-    return res.status(400).json({ error: "Nenhum campo permitido para atualização" });
+    return res
+      .status(400)
+      .json({ error: "Nenhum campo permitido para atualização" });
   }
 
   const user = await User.findByIdAndUpdate(id, updates, {

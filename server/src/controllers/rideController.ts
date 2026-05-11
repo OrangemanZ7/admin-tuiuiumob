@@ -1,3 +1,5 @@
+// TUIUIUMOB/server/src/controllers/rideController.ts
+
 import type { Request, Response } from "express";
 import mongoose from "mongoose";
 import { Ride } from "../models/Ride.js";
@@ -55,7 +57,9 @@ export async function createRide(req: Request, res: Response) {
     }
 
     if (req.auth?.type === "driver" && driverId !== req.auth.sub) {
-      return res.status(403).json({ error: "Não pode criar viagem para outro motorista" });
+      return res
+        .status(403)
+        .json({ error: "Não pode criar viagem para outro motorista" });
     }
 
     const driver = await Driver.findById(driverId).lean();
@@ -74,7 +78,12 @@ export async function createRide(req: Request, res: Response) {
       return res.status(404).json({ error: "Veículo não encontrado" });
     }
 
-    if (!driverOwnsVehicle(driver as { vehicles: mongoose.Types.ObjectId[] }, vehicleId)) {
+    if (
+      !driverOwnsVehicle(
+        driver as { vehicles: mongoose.Types.ObjectId[] },
+        vehicleId,
+      )
+    ) {
       return res
         .status(400)
         .json({ error: "Este veículo não pertence ao motorista" });
@@ -198,7 +207,9 @@ export async function closeRide(req: Request, res: Response) {
   const owns =
     req.auth?.type === "driver" && String(ride.driverId) === req.auth.sub;
   if (!owns && !isAdmin(req.auth)) {
-    return res.status(403).json({ error: "Somente o motorista da viagem pode encerrar" });
+    return res
+      .status(403)
+      .json({ error: "Somente o motorista da viagem pode encerrar" });
   }
 
   const updated = await Ride.findByIdAndUpdate(
@@ -221,7 +232,9 @@ export async function updateRide(req: Request, res: Response) {
   const owns =
     req.auth?.type === "driver" && String(ride.driverId) === req.auth.sub;
   if (!owns && !isAdmin(req.auth)) {
-    return res.status(403).json({ error: "Sem permissão para editar esta viagem" });
+    return res
+      .status(403)
+      .json({ error: "Sem permissão para editar esta viagem" });
   }
 
   const updates = pickAllowedKeys(req.body as Record<string, unknown>, [
@@ -238,11 +251,9 @@ export async function updateRide(req: Request, res: Response) {
   if (updates.seatsAvailable !== undefined) {
     const n = Number(updates.seatsAvailable);
     if (Number.isNaN(n) || n < ride.passengers.length) {
-      return res
-        .status(400)
-        .json({
-          error: `Assentos disponíveis deve ser >= ${ride.passengers.length} (passageiros atuais)`,
-        });
+      return res.status(400).json({
+        error: `Assentos disponíveis deve ser >= ${ride.passengers.length} (passageiros atuais)`,
+      });
     }
   }
 
@@ -251,7 +262,9 @@ export async function updateRide(req: Request, res: Response) {
   }
 
   if (Object.keys(updates).length === 0) {
-    return res.status(400).json({ error: "Nenhum campo permitido para atualização" });
+    return res
+      .status(400)
+      .json({ error: "Nenhum campo permitido para atualização" });
   }
 
   Object.assign(ride, updates);
@@ -277,7 +290,9 @@ export async function deleteRide(req: Request, res: Response) {
   const owns =
     req.auth?.type === "driver" && String(ride.driverId) === req.auth.sub;
   if (!owns && !isAdmin(req.auth)) {
-    return res.status(403).json({ error: "Sem permissão para excluir esta viagem" });
+    return res
+      .status(403)
+      .json({ error: "Sem permissão para excluir esta viagem" });
   }
 
   await Ride.findByIdAndDelete(id);

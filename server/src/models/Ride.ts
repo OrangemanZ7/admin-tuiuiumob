@@ -1,3 +1,5 @@
+// TUIUIUMOB/server/src/models/Ride.ts
+
 import { Schema, model, type Document, Types } from "mongoose";
 
 export interface IRide extends Document {

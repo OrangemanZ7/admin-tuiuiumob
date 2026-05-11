@@ -1,3 +1,5 @@
+// TUIUIUMOB/apps/admin/src/pages/Drivers/DriversPage.tsx
+
 import { useCallback, useEffect, useState } from "react";
 import { Layout } from "../../layout/Layout";
 import {
@@ -108,20 +110,31 @@ export default function DriversPage() {
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-slate-500">
+                <td
+                  colSpan={7}
+                  className="px-4 py-8 text-center text-slate-500"
+                >
                   Carregando…
                 </td>
               </tr>
             ) : rows.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-slate-500">
+                <td
+                  colSpan={7}
+                  className="px-4 py-8 text-center text-slate-500"
+                >
                   Nenhum motorista
                 </td>
               </tr>
             ) : (
               rows.map((d) => (
-                <tr key={d._id} className="border-b border-slate-100 hover:bg-slate-50/80">
-                  <td className="px-4 py-3 font-medium text-slate-800">{d.name}</td>
+                <tr
+                  key={d._id}
+                  className="border-b border-slate-100 hover:bg-slate-50/80"
+                >
+                  <td className="px-4 py-3 font-medium text-slate-800">
+                    {d.name}
+                  </td>
                   <td className="px-4 py-3 text-slate-600">{d.email}</td>
                   <td className="px-4 py-3 text-slate-600">{d.cnh}</td>
                   <td className="px-4 py-3 text-slate-600">{d.status}</td>
@@ -166,7 +179,9 @@ export default function DriversPage() {
                 placeholder="Nome"
                 className="w-full rounded-lg border border-slate-300 px-3 py-2"
                 value={form.name}
-                onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, name: e.target.value }))
+                }
               />
               <input
                 required
@@ -174,7 +189,9 @@ export default function DriversPage() {
                 placeholder="Email"
                 className="w-full rounded-lg border border-slate-300 px-3 py-2"
                 value={form.email}
-                onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, email: e.target.value }))
+                }
               />
               <input
                 required
@@ -191,7 +208,9 @@ export default function DriversPage() {
                 placeholder="CNH"
                 className="w-full rounded-lg border border-slate-300 px-3 py-2"
                 value={form.cnh}
-                onChange={(e) => setForm((f) => ({ ...f, cnh: e.target.value }))}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, cnh: e.target.value }))
+                }
               />
               <div className="flex justify-end gap-2 pt-2">
                 <button

@@ -1,13 +1,14 @@
+// TUIUIUMOB/apps/admin/src/components/Sidebar.tsx
+
 import { NavLink } from "react-router-dom";
 
 const linkClass =
   "block rounded px-3 py-2 transition hover:bg-gray-700 text-gray-200";
 
 function navClass({ isActive }: { isActive: boolean }) {
-  return [
-    linkClass,
-    isActive ? "bg-gray-800 text-white font-medium" : "",
-  ].join(" ");
+  return [linkClass, isActive ? "bg-gray-800 text-white font-medium" : ""].join(
+    " ",
+  );
 }
 
 export function Sidebar() {

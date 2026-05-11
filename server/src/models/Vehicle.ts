@@ -1,4 +1,4 @@
-// server/src/models/Vehicle.ts
+// TUIUIUMOB/server/src/models/Vehicle.ts
 
 import { Schema, model, type Document, type Types } from "mongoose";
 

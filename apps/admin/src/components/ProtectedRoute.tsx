@@ -1,3 +1,5 @@
+// TUIUIUMOB/apps/admin/src/components/ProtectedRoute.tsx
+
 import { Navigate, useLocation } from "react-router-dom";
 
 export function ProtectedRoute({ children }: { children: JSX.Element }) {

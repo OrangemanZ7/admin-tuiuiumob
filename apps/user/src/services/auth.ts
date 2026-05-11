@@ -1,4 +1,4 @@
-// apps/user/src/services/auth.ts
+// TUIUIUMOB/apps/user/src/services/auth.ts
 
 import { api } from "./api";
 
@@ -10,7 +10,14 @@ export async function loginUser(email: string, password: string) {
 
   return response.data as {
     token: string;
-    user: { id?: string; _id?: string; name: string; email: string; status: string; role?: string };
+    user: {
+      id?: string;
+      _id?: string;
+      name: string;
+      email: string;
+      status: string;
+      role?: string;
+    };
   };
 }
 

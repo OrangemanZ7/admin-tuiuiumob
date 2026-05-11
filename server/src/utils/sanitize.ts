@@ -1,3 +1,5 @@
+// TUIUIUMOB/server/src/utils/sanitize.ts
+
 /** Remove passwordHash from a plain user/driver object for JSON responses. */
 export function stripPassword<T extends { passwordHash?: string }>(
   doc: T | null | undefined,

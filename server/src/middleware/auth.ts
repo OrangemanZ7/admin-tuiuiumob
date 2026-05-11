@@ -1,3 +1,5 @@
+// TUIUIUMOB/server/src/middleware/auth.ts
+
 import type { NextFunction, Request, Response } from "express";
 import { verifyAccessToken } from "../auth/jwt.js";
 import type { AuthPayload } from "../auth/types.js";

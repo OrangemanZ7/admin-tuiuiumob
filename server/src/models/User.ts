@@ -1,3 +1,5 @@
+// TUIUIUMOB/server/src/models/User.ts
+
 import { Schema, model, type Document } from "mongoose";
 
 export type UserRole = "user" | "admin";

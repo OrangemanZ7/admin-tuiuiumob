@@ -1,4 +1,4 @@
-// apps/user/src/router/PrivateRoute.tsx
+// TUIUIUMOB/apps/user/src/router/PrivateRoute.tsx
 
 import { Navigate } from "react-router-dom";
 

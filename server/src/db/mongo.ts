@@ -1,4 +1,4 @@
-// src/db/mongo.ts
+// TUIUIUMOB/server/src/db/mongo.ts
 
 import mongoose from "mongoose";
 

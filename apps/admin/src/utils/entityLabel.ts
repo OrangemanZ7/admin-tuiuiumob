@@ -1,3 +1,5 @@
+// TUIUIUMOB/apps/admin/src/utils/entityLabel.ts
+
 /** Best-effort label for populated Mongoose refs or raw ids. */
 export function labelRef(
   ref: unknown,

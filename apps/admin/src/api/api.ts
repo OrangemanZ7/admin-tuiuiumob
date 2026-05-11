@@ -1,4 +1,4 @@
-// apps/admin/src/api/api.ts
+// TUIUIUMOB/apps/admin/src/api/api.ts
 
 import axios from "axios";
 

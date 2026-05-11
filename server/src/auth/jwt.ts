@@ -1,3 +1,5 @@
+// TUIUIUMOB/server/src/auth/jwt.ts
+
 import jwt from "jsonwebtoken";
 import type { UserRole } from "./types.js";
 
@@ -28,6 +30,8 @@ export function signDriverToken(driverId: string): string {
   return jwt.sign(payload, getJwtSecret(), { expiresIn: "7d" });
 }
 
-export function verifyAccessToken(token: string): JwtUserClaims | JwtDriverClaims {
+export function verifyAccessToken(
+  token: string,
+): JwtUserClaims | JwtDriverClaims {
   return jwt.verify(token, getJwtSecret()) as JwtUserClaims | JwtDriverClaims;
 }

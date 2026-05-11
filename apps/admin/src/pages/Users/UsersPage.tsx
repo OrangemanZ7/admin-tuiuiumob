@@ -1,3 +1,5 @@
+// TUIUIUMOB/apps/admin/src/pages/Users/UsersPage.tsx
+
 import { useCallback, useEffect, useState } from "react";
 import { Layout } from "../../layout/Layout";
 import {
@@ -106,26 +108,40 @@ export default function UsersPage() {
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-slate-500">
+                <td
+                  colSpan={5}
+                  className="px-4 py-8 text-center text-slate-500"
+                >
                   Carregando…
                 </td>
               </tr>
             ) : rows.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-slate-500">
+                <td
+                  colSpan={5}
+                  className="px-4 py-8 text-center text-slate-500"
+                >
                   Nenhum usuário
                 </td>
               </tr>
             ) : (
               rows.map((u) => (
-                <tr key={u._id} className="border-b border-slate-100 hover:bg-slate-50/80">
-                  <td className="px-4 py-3 font-medium text-slate-800">{u.name}</td>
+                <tr
+                  key={u._id}
+                  className="border-b border-slate-100 hover:bg-slate-50/80"
+                >
+                  <td className="px-4 py-3 font-medium text-slate-800">
+                    {u.name}
+                  </td>
                   <td className="px-4 py-3 text-slate-600">{u.email}</td>
                   <td className="px-4 py-3">
                     <select
                       value={u.status}
                       onChange={(e) =>
-                        void onStatus(u._id, e.target.value as AdminUser["status"])
+                        void onStatus(
+                          u._id,
+                          e.target.value as AdminUser["status"],
+                        )
                       }
                       className="rounded border border-slate-300 bg-white px-2 py-1 text-sm"
                     >
@@ -134,7 +150,9 @@ export default function UsersPage() {
                       <option value="blocked">blocked</option>
                     </select>
                   </td>
-                  <td className="px-4 py-3 text-slate-600">{u.role ?? "user"}</td>
+                  <td className="px-4 py-3 text-slate-600">
+                    {u.role ?? "user"}
+                  </td>
                   <td className="px-4 py-3">
                     <button
                       type="button"
@@ -163,7 +181,9 @@ export default function UsersPage() {
                 placeholder="Nome"
                 className="w-full rounded-lg border border-slate-300 px-3 py-2"
                 value={form.name}
-                onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, name: e.target.value }))
+                }
               />
               <input
                 required
@@ -171,7 +191,9 @@ export default function UsersPage() {
                 placeholder="Email"
                 className="w-full rounded-lg border border-slate-300 px-3 py-2"
                 value={form.email}
-                onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, email: e.target.value }))
+                }
               />
               <input
                 required

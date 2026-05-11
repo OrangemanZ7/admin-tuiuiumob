@@ -1,4 +1,4 @@
-// apps/driver/src/pages/RideStatus.tsx
+// TUIUIUMOB/apps/driver/src/pages/RideStatus.tsx
 
 import { useEffect, useState } from "react";
 import { getMyRides } from "../services/rides";

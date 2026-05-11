@@ -1,4 +1,4 @@
-// apps/driver/src/layout/Sidebar.jsx
+// TUIUIUMOB/apps/driver/src/components/Sidebar.tsx
 
 import { Link } from "react-router-dom";
 

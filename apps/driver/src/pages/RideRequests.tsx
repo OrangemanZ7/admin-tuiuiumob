@@ -1,4 +1,4 @@
-// driver/src/pages/RideRequests.tsx
+// TUIUIUMOB/apps/driver/src/pages/RideRequests.tsx
 
 import { useEffect, useState } from "react";
 import { getPendingRequests, acceptRequest } from "../services/rides";

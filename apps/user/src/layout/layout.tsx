@@ -1,4 +1,4 @@
-// apps/user/src/layout/layout.tsx
+// TUIUIUMOB/apps/user/src/layout/layout.tsx
 
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";

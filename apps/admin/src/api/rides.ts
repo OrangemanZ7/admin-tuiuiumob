@@ -1,3 +1,5 @@
+// TUIUIUMOB/apps/admin/src/api/rides.ts
+
 import { api } from "./api";
 
 export type RideStatus = "open" | "closed" | "cancelled";

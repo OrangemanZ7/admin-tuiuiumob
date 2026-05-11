@@ -1,3 +1,5 @@
+// TUIUIUMOB/apps/admin/src/layout/Layout.tsx
+
 import type { ReactNode } from "react";
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";

@@ -1,3 +1,4 @@
+// TUIUIUMOB/server/src/routes/vehicles.ts
 import { Router } from "express";
 import {
   createVehicle,
@@ -7,7 +8,11 @@ import {
   updateVehicle,
   deleteVehicle,
 } from "../controllers/vehicleController.js";
-import { authMiddleware, requireAdmin, requireAdminOrDriver } from "../middleware/auth.js";
+import {
+  authMiddleware,
+  requireAdmin,
+  requireAdminOrDriver,
+} from "../middleware/auth.js";
 
 const router = Router();
 

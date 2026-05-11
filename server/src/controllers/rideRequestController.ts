@@ -1,4 +1,4 @@
-// src/controllers/rideRequestController.ts
+// TUIUIUMOB/server/src/controllers/rideRequestController.ts
 
 import type { Request, Response } from "express";
 import mongoose from "mongoose";
@@ -113,7 +113,9 @@ export async function acceptRequest(req: Request, res: Response) {
     if (!driverOwns && !isAdmin(req.auth)) {
       return res
         .status(403)
-        .json({ error: "Somente o motorista da viagem pode aceitar solicitações" });
+        .json({
+          error: "Somente o motorista da viagem pode aceitar solicitações",
+        });
     }
 
     if (ride.seatsAvailable <= 0) {
@@ -155,14 +157,11 @@ export async function rejectRequest(req: Request, res: Response) {
       }
     } else {
       const driverOwns =
-        req.auth?.type === "driver" &&
-        String(ride.driverId) === req.auth.sub;
+        req.auth?.type === "driver" && String(ride.driverId) === req.auth.sub;
       if (!driverOwns && !isAdmin(req.auth)) {
-        return res
-          .status(403)
-          .json({
-            error: "Somente o motorista da viagem pode rejeitar solicitações",
-          });
+        return res.status(403).json({
+          error: "Somente o motorista da viagem pode rejeitar solicitações",
+        });
       }
     }
 
@@ -192,10 +191,7 @@ export async function cancelRequest(req: Request, res: Response) {
     }
 
     const ownerId = String(request.userId);
-    if (
-      req.auth?.type !== "user" ||
-      req.auth.sub !== ownerId
-    ) {
+    if (req.auth?.type !== "user" || req.auth.sub !== ownerId) {
       return res
         .status(403)
         .json({ error: "Somente o passageiro solicitante pode cancelar" });
@@ -221,7 +217,9 @@ export async function createRideRequest(req: Request, res: Response) {
 
     const userId = req.auth?.sub;
     if (req.auth?.type !== "user" || !userId) {
-      return res.status(403).json({ error: "Autenticação de passageiro necessária" });
+      return res
+        .status(403)
+        .json({ error: "Autenticação de passageiro necessária" });
     }
 
     const request = await RideRequest.create({
@@ -261,7 +259,10 @@ export async function getLatestRideRequestMe(req: Request, res: Response) {
   }
 }
 
-export async function getLatestRideRequestByUserId(req: Request, res: Response) {
+export async function getLatestRideRequestByUserId(
+  req: Request,
+  res: Response,
+) {
   try {
     const { userId } = req.params;
 
@@ -318,7 +319,9 @@ export async function listPendingRequests(req: Request, res: Response) {
       };
       if (rideId) {
         if (!rideIds.some((id) => String(id) === rideId)) {
-          return res.status(403).json({ error: "Viagem não pertence a este motorista" });
+          return res
+            .status(403)
+            .json({ error: "Viagem não pertence a este motorista" });
         }
         filter.rideId = rideId;
       }
@@ -341,7 +344,9 @@ export async function listRideRequestsByRideQuery(req: Request, res: Response) {
   try {
     const rideId = req.query.rideId as string | undefined;
     if (!rideId || !mongoose.isValidObjectId(rideId)) {
-      return res.status(400).json({ error: "Query rideId inválida ou ausente" });
+      return res
+        .status(400)
+        .json({ error: "Query rideId inválida ou ausente" });
     }
 
     const ride = await Ride.findById(rideId).lean();
@@ -393,12 +398,8 @@ export async function getRideRequestById(req: Request, res: Response) {
 
     const driverIdRaw = ride?.driverId;
     const driverIdStr =
-      driverIdRaw &&
-      typeof driverIdRaw === "object" &&
-      "_id" in driverIdRaw
-        ? String(
-            (driverIdRaw as { _id: mongoose.Types.ObjectId })._id,
-          )
+      driverIdRaw && typeof driverIdRaw === "object" && "_id" in driverIdRaw
+        ? String((driverIdRaw as { _id: mongoose.Types.ObjectId })._id)
         : String(driverIdRaw ?? "");
 
     const userOwns = req.auth?.type === "user" && req.auth.sub === uid;

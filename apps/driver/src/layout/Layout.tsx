@@ -1,4 +1,4 @@
-// apps/driver/src/layout/Layout.jsx
+// TUIUIUMOB/apps/driver/src/layout/Layout.tsx
 
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";

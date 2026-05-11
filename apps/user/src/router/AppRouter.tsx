@@ -1,4 +1,4 @@
-// apps/user/src/router/AppRouter.tsx
+// TUIUIUMOB/apps/user/src/router/AppRouter.tsx
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";

@@ -1,4 +1,4 @@
-// apps/user/src/services/rides.ts
+// TUIUIUMOB/apps/user/src/services/rides.ts
 
 import { api } from "./api";
 
