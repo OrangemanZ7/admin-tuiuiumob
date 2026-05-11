@@ -1,19 +1,7 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "jsx": "react-jsx",
-    "strict": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-
-    "baseUrl": "./src",
-
-    "types": ["vite/client"],
-
-    "ignoreDeprecations": "6.0"
+    "baseUrl": "./src"
   },
-
-  "include": ["src", "tailwind.config.ts", "postcss.config.cjs"]
+  "include": ["src"]
 }

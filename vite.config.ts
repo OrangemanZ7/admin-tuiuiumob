@@ -1,3 +1,5 @@
+// TUIUIUMOB/vite.config.ts
+
 import { VitePWA } from "vite-plugin-pwa";
 
 export default {
@@ -5,8 +7,8 @@ export default {
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
-        name: "Administração - Caronas Interurbanas",
-        short_name: "Admin Caronas",
+        name: "TUIUIUMOB",
+        short_name: "TUIUIUMOB",
         start_url: "/",
         display: "standalone",
         background_color: "#ffffff",
